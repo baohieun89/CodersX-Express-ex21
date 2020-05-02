@@ -17,19 +17,18 @@ router.use(express.urlencoded({ extended: true }))
 
 router.get('/', controller.index);
 router.get('/search', controller.search);
-
-
 router.get('/create', controller.create);
+router.get('/profile', controller.profile);
+router.get('/:id', controller.view);
+router.get('/edit/:id', controller.edit);
+router.get('/:id/delete', controller.delete);
 
+
+router.post('/profile',upload.single('avatar'), controller.postProfile);
+router.post('/edit/:id', controller.postEdit);
 router.post('/create',
   upload.single('avatar'),
   validate.postCreate,
   controller.postCreate
 );
-
-router.get('/:id', controller.view);
-router.get('/edit/:id', controller.edit);
-router.post('/edit/:id', controller.postEdit);
-router.get('/:id/delete', controller.delete);
-
 module.exports = router;
